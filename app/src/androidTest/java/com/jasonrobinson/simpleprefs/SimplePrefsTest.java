@@ -27,6 +27,12 @@ public class SimplePrefsTest extends AndroidTestCase {
         assertEquals("value", value);
     }
 
+    public void testBooleanProviderValue() throws Exception {
+        mPrefs.put("key", true);
+        boolean value = mPrefs.get("key", false, Boolean.class);
+        assertEquals(true, value);
+    }
+
     public void testMissingProvider() throws Exception {
         try {
             mPrefs.put("key", new Dummy("value"));

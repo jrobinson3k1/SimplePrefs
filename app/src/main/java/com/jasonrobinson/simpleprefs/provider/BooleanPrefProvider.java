@@ -6,7 +6,7 @@ public class BooleanPrefProvider implements PrefProvider<Boolean> {
 
     @Override
     public void put(SharedPreferences prefs, String key, Boolean value) {
-        prefs.edit().putBoolean(key, value);
+        prefs.edit().putBoolean(key, value).apply();
     }
 
     @Override
