@@ -45,10 +45,10 @@ public class SimplePrefs {
         }
     }
 
-    public <T> void put(String key, T obj) {
-        PrefProvider<T> provider = (PrefProvider<T>) getProvider(obj.getClass());
+    public <T> void put(String key, T obj, Class<?> valueClass) {
+        PrefProvider<T> provider = (PrefProvider<T>) getProvider(valueClass);
         if (provider == null) {
-            throw new IllegalStateException("Missing provider for " + obj.getClass().getName() + ".");
+            throw new IllegalStateException("Missing provider for " + valueClass.getName() + ".");
         }
 
         provider.put(mPrefs, key, obj);
@@ -57,7 +57,7 @@ public class SimplePrefs {
     public <T> T get(String key, T defaultValue, Class<?> valueClass) {
         PrefProvider<T> provider = (PrefProvider<T>) getProvider(valueClass);
         if (provider == null) {
-            throw new IllegalStateException("Missing provider for " + defaultValue.getClass().getName() + ".");
+            throw new IllegalStateException("Missing provider for " + valueClass.getName() + ".");
         }
 
         return provider.get(mPrefs, key, defaultValue);
